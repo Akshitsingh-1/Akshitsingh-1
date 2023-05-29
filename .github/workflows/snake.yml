@@ -20,17 +20,15 @@ jobs:
         with:
           node-version: 16
 
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: generate snake.svg
+        uses: Platane/snk/svg-only@v2
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: dist/snake.svg
 
-      - name: Install dependencies
-        run: npm install
 
-      - name: Generate snake.svg
-        run: npx snk svg-only --github-user-name Akshitsingh-1 --output dist/snake.svg
-
-      - name: Push snake.svg to the output branch
-        uses: crazy-max/ghaction-github-pages@v3
+      - name: push snake.svg to the output branch
+        uses: crazy-max/ghaction-github-pages@v2.6.0
         with:
           target_branch: output
           build_dir: dist
